@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aurea Lux | Joyas Exclusivas</title>
+    <style>
+        /* ==== GLOBAL VARIABLES ==== */
+        :root {
+            --primary-dark: #0D0D0D;
+            --secondary-dark: #1A1A1A;
+            --accent-gold: #D4AF37;
+            --accent-gold-light: #E8C874;
+            --accent-diamond: #B9F2FF;
+            --text-light: #F0F0F0;
+            --text-gray: #AAAAAA;
+            --border-dark: #333333;
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+        }
+
+        /* ==== BASE STYLES ==== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Playfair Display', 'Times New Roman', serif;
+        }
+
+        body {
+            background-color: var(--primary-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%230D0D0D"/><path d="M0,0 L100,100 M100,0 L0,100" stroke="%231A1A1A" stroke-width="0.5"/></svg>');
+        }
+
+        a {
+            color: var(--accent-gold);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--accent-gold-light);
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+        }
+
+        /* ==== CENTERED HEADER ==== */
+        .header {
+            text-align: center;
+            padding: 3rem 1rem;
+            background: linear-gradient(to bottom, var(--primary-dark), rgba(26, 26, 26, 0.8));
+            border-bottom: 1px solid var(--border-dark);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, rgba(212, 175, 55, 0.05) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .logo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .logo-icon {
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, var(--accent-gold) 0%, var(--accent-gold-light) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            color: var(--primary-dark);
+            font-size: 2.5rem;
+            font-weight: bold;
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.5);
+            position: relative;
+        }
+
+        .logo-icon::after {
+            content: "";
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, transparent, var(--accent-diamond), transparent);
+            z-index: -1;
+            opacity: 0.7;
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .logo-text {
+            font-size: 3.5rem;
+            font-weight: 700;
+            background: linear-gradient(to right, var(--accent-gold), var(--accent-diamond), var(--accent-gold-light));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: 3px;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+        }
+
+        .tagline {
+            color: var(--text-gray);
+            font-size: 1.1rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            font-style: italic;
+            margin-top: 0.5rem;
+        }
+
+        /* ==== NAVIGATION ==== */
+        .main-nav {
+            display: flex;
+            justify-content: center;
+            background-color: rgba(26, 26, 26, 0.9);
+            padding: 1.2rem;
+            border-bottom: 1px solid var(--border-dark);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-list {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        .nav-item {
+            position: relative;
+            text-align: center;
+        }
+
+        .nav-link {
+            padding: 0.7rem 1.5rem;
+            border-radius: var(--radius-sm);
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1.5px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .nav-link.active {
+            background-color: rgba(212, 175, 55, 0.2);
+            color: var(--accent-gold-light);
+        }
+
+        .nav-link::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--accent-gold), transparent);
+            transition: all 0.3s;
+            transform: translateX(-50%);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* ==== MAIN CONTENT ==== */
+        .container {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 1.5rem;
+        }
+
+        .disclaimer {
+            background-color: rgba(212, 175, 55, 0.1);
+            border: 1px solid var(--accent-gold);
+            color: var(--accent-gold-light);
+            padding: 1.5rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            border-radius: var(--radius-md);
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.1);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-header::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--accent-gold), transparent);
+            z-index: -1;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            color: var(--accent-gold);
+            margin-bottom: 0.8rem;
+            letter-spacing: 2px;
+            display: inline-block;
+            background-color: var(--primary-dark);
+            padding: 0 2rem;
+        }
+
+        .section-subtitle {
+            color: var(--text-gray);
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto;
+            font-style: italic;
+        }
+
+        /* ==== PRODUCT GRID ==== */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 4rem;
+        }
+
+        .product-card {
+            background: linear-gradient(to bottom, rgba(40, 40, 40, 0.8), rgba(26, 26, 26, 0.9));
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            transition: all 0.4s ease;
+            text-align: center;
+            position: relative;
+            backdrop-filter: blur(5px);
+        }
+
+        .product-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: var(--radius-lg);
+            padding: 1px;
+            background: linear-gradient(45deg, var(--accent-gold), var(--accent-diamond), var(--accent-gold));
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask-composite: subtract;
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+            border-color: transparent;
+        }
+
+        .product-card:hover::before {
+            opacity: 1;
+        }
+
+        .product-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            transition: transform 0.5s;
+        }
+
+        .product-card:hover .product-image {
+            transform: scale(1.05);
+        }
+
+        .product-content {
+            padding: 2rem 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .product-title {
+            font-size: 1.4rem;
+            color: var(--accent-gold);
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .product-price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 0.8rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .price-fiat {
+            color: var(--text-light);
+            font-size: 1.8rem;
+        }
+
+        .price-crypto {
+            color: #F7931A;
+            font-size: 1rem;
+            background-color: rgba(247, 147, 26, 0.1);
+            padding: 0.4rem 0.8rem;
+            border-radius: var(--radius-sm);
+            border: 1px solid rgba(247, 147, 26, 0.3);
+        }
+
+        .product-seller {
+            font-size: 0.9rem;
+            color: var(--text-gray);
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+
+        .product-description {
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-gray);
+            line-height: 1.7;
+        }
+
+        .product-actions {
+            display: flex;
+            justify-content: center;
+            gap: 1.2rem;
+        }
+
+        .quantity-selector {
+            display: flex;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: var(--radius-sm);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .quantity-btn {
+            background-color: transparent;
+            color: var(--accent-gold);
+            border: none;
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.2s;
+        }
+
+        .quantity-btn:hover {
+            background-color: rgba(212, 175, 55, 0.1);
+        }
+
+        .quantity-input {
+            width: 45px;
+            height: 35px;
+            text-align: center;
+            background-color: transparent;
+            border: none;
+            color: var(--text-light);
+            font-size: 1rem;
+        }
+
+        .btn {
+            background: linear-gradient(to right, var(--accent-gold), var(--accent-gold-light));
+            color: #000;
+            border: none;
+            padding: 0.7rem 1.8rem;
+            border-radius: var(--radius-sm);
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+
+        .btn:hover {
+            background: linear-gradient(to right, var(--accent-gold-light), var(--accent-gold));
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
+        }
+
+        /* ==== PAGINATION ==== */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 0.8rem;
+            margin-top: 3rem;
+        }
+
+        .page-item {
+            list-style: none;
+        }
+
+        .page-link {
+            display: block;
+            width: 45px;
+            height: 45px;
+            line-height: 45px;
+            text-align: center;
+            background-color: var(--secondary-dark);
+            border-radius: 50%;
+            transition: all 0.3s;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .page-link:hover, .page-item.active .page-link {
+            background-color: var(--accent-gold);
+            color: #000;
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+        }
+
+        /* ==== FOOTER ==== */
+        .footer {
+            text-align: center;
+            padding: 3rem;
+            background-color: var(--secondary-dark);
+            border-top: 1px solid var(--border-dark);
+            margin-top: 4rem;
+            position: relative;
+        }
+
+        .footer::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--accent-gold), transparent);
+        }
+
+        .footer-text {
+            font-size: 0.9rem;
+            color: var(--text-gray);
+            margin-bottom: 0.8rem;
+            letter-spacing: 1px;
+        }
+
+        /* ==== RESPONSIVE DESIGN ==== */
+        @media (max-width: 768px) {
+            .nav-list {
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+
+            .product-grid {
+                grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            }
+
+            .product-actions {
+                flex-direction: column;
+            }
+
+            .quantity-selector {
+                justify-content: center;
+                margin-bottom: 1rem;
+            }
+            
+            .logo-text {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo-text {
+                font-size: 2rem;
+            }
+
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- HEADER -->
+    <header class="header">
+        <div class="logo">
+            <div class="logo-icon">AL</div>
+            <h1 class="logo-text">AUREA LUX</h1>
+            <p class="tagline">JOYAS EXCLUSIVAS DE ALTA GAMA</p>
+        </div>
+    </header>
+
+    <!-- NAVIGATION -->
+    <nav class="main-nav">
+        <ul class="nav-list">
+            <li class="nav-item"><a href="#" class="nav-link active">Inicio</a></li>
+            <li class="nav-item"><a href="#" class="nav-link">Anillos</a></li>
+            <li class="nav-item"><a href="#" class="nav-link">Collares</a></li>
+            <li class="nav-item"><a href="#" class="nav-link">Pendientes</a></li>
+            <li class="nav-item"><a href="#" class="nav-link">Pulseras</a></li>
+            <li class="nav-item"><a href="#" class="nav-link">Personalizado</a></li>
+        </ul>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <main class="container">
+        <div class="disclaimer">
+            ✨ CADA JOYA ES UNA OBRA MAESTRA ÚNICA, CERTIFICADA Y CON GARANTÍA DE AUTENTICIDAD ✨
+        </div>
+
+        <div class="section-header">
+            <h2 class="section-title">COLECCIÓN EXCLUSIVA</h2>
+            <p class="section-subtitle">Descubre nuestras piezas más exquisitas, creadas con los materiales más preciosos y diseño artesanal.</p>
+        </div>
+
+        <div class="product-grid">
+            <!-- PRODUCT 1 -->
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Anillo de Diamantes" class="product-image">
+                <div class="product-content">
+                    <h3 class="product-title">ANILLO ETERNITY DIAMANTES</h3>
+                    <div class="product-price">
+                        <span class="price-fiat">$12,499.99</span>
+                        <span class="price-crypto">₿ 0.32</span>
+                    </div>
+                    <p class="product-seller">Artista: Maison de Joaillerie (París, FR)</p>
+                    <p class="product-description">Anillo eternity con 24 diamantes talla brillante de 1.5 quilates total, montura en platino de 18k.</p>
+                    <div class="product-actions">
+                        <div class="quantity-selector">
+                            <button class="quantity-btn">-</button>
+                            <input type="text" class="quantity-input" value="1">
+                            <button class="quantity-btn">+</button>
+                        </div>
+                        <button class="btn">AÑADIR AL CARRITO</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PRODUCT 2 -->
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Collar de Esmeraldas" class="product-image">
+                <div class="product-content">
+                    <h3 class="product-title">COLLAR ESMERALDA COLOMBIANA</h3>
+                    <div class="product-price">
+                        <span class="price-fiat">$24,799.99</span>
+                        <span class="price-crypto">₿ 0.64</span>
+                    </div>
+                    <p class="product-seller">Artista: GemArtisans (Bogotá, CO)</p>
+                    <p class="product-description">Esmeralda colombiana de 8 quilates en colgante, rodeada de diamantes y cadena de oro blanco 18k.</p>
+                    <div class="product-actions">
+                        <div class="quantity-selector">
+                            <button class="quantity-btn">-</button>
+                            <input type="text" class="quantity-input" value="1">
+                            <button class="quantity-btn">+</button>
+                        </div>
+                        <button class="btn">AÑADIR AL CARRITO</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PRODUCT 3 -->
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1602173574767-37ac01994b2a?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Pendientes Rubí" class="product-image">
+                <div class="product-content">
+                    <h3 class="product-title">PENDIENTES RUBÍ BIRMANO</h3>
+                    <div class="product-price">
+                        <span class="price-fiat">$8,899.99</span>
+                        <span class="price-crypto">₿ 0.23</span>
+                    </div>
+                    <p class="product-seller">Artista: OrientalGems (Yangon, MM)</p>
+                    <p class="product-description">Pendientes con rubíes birmanos de 2 quilates cada uno, engastados en oro rosa 18k con diamantes.</p>
+                    <div class="product-actions">
+                        <div class="quantity-selector">
+                            <button class="quantity-btn">-</button>
+                            <input type="text" class="quantity-input" value="1">
+                            <button class="quantity-btn">+</button>
+                        </div>
+                        <button class="btn">AÑADIR AL CARRITO</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- PRODUCT 4 -->
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1588444650700-6c7f0c89d36b?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Pulsera Diamantes" class="product-image">
+                <div class="product-content">
+                    <h3 class="product-title">PULSERA TENNIS DIAMANTES</h3>
+                    <div class="product-price">
+                        <span class="price-fiat">$15,299.99</span>
+                        <span class="price-crypto">₿ 0.40</span>
+                    </div>
+                    <p class="product-seller">Artista: DiamondCrafters (Antwerp, BE)</p>
+                    <p class="product-description">Pulsera tennis con 48 diamantes de talla brillante totalizando 5 quilates, cierre de seguridad.</p>
+                    <div class="product-actions">
+                        <div class="quantity-selector">
+                            <button class="quantity-btn">-</button>
+                            <input type="text" class="quantity-input" value="1">
+                            <button class="quantity-btn">+</button>
+                        </div>
+                        <button class="btn">AÑADIR AL CARRITO</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- PRODUCT 5 -->
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Anillo Solitario" class="product-image">
+                <div class="product-content">
+                    <h3 class="product-title">ANILLO SOLITARIO DIAMANTE</h3>
+                    <div class="product-price">
+                        <span class="price-fiat">$19,999.99</span>
+                        <span class="price-crypto">₿ 0.52</span>
+                    </div>
+                    <p class="product-seller">Artista: MasterGoldsmiths (NY, USA)</p>
+                    <p class="product-description">Diamante solitario de 2.5 quilates, corte ideal, color D, pureza IF, montura en platino.</p>
+                    <div class="product-actions">
+                        <div class="quantity-selector">
+                            <button class="quantity-btn">-</button>
+                            <input type="text" class="quantity-input" value="1">
+                            <button class="quantity-btn">+</button>
+                        </div>
+                        <button class="btn">AÑADIR AL CARRITO</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- PRODUCT 6 -->
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1506630448388-4e683c67ddb0?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Conjunto Zafiro" class="product-image">
+                <div class="product-content">
+                    <h3 class="product-title">CONJUNTO ZAFIRO AZUL CEILÁN</h3>
+                    <div class="product-price">
+                        <span class="price-fiat">$32,499.99</span>
+                        <span class="price-crypto">₿ 0.85</span>
+                    </div>
+                    <p class="product-seller">Artista: RoyalJewels (Colombo, LK)</p>
+                    <p class="product-description">Conjunto completo: collar, pendientes y anillo con zafiros azules de Ceilán y diamantes blancos.</p>
+                    <div class="product-actions">
+                        <div class="quantity-selector">
+                            <button class="quantity-btn">-</button>
+                            <input type="text" class="quantity-input" value="1">
+                            <button class="quantity-btn">+</button>
+                        </div>
+                        <button class="btn">AÑADIR AL CARRITO</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PAGINATION -->
+        <ul class="pagination">
+            <li class="page-item"><a href="#" class="page-link">«</a></li>
+            <li class="page-item active"><a href="#" class="page-link">1</a></li>
+            <li class="page-item"><a href="#" class="page-link">2</a></li>
+            <li class="page-item"><a href="#" class="page-link">3</a></li>
+            <li class="page-item"><a href="#" class="page-link">»</a></li>
+        </ul>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <p class="footer-text">© 2023 AUREA LUX - JOYAS EXCLUSIVAS DE ALTA GAMA</p>
+        <p class="footer-text">Cada pieza es única y cuenta con certificado de autenticidad y garantía de por vida</p>
+    </footer>
+</body>
+</html>
